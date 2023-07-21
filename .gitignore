@@ -1,5 +1,5 @@
 # Dependencies
-/node_modules
+node_modules
 
 # Build output
 /build
@@ -17,5 +17,3 @@ Thumbs.db
 
 # Other project-specific files to ignore
 
-# Ignore node_modules inside client
-/client/node_modules
