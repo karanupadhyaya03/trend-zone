@@ -1,5 +1,6 @@
-import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
-import { sampleProducts } from './data';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
+import { USER_DISPLAY_STRINGS as STRINGS } from './resources/user_display_strings';
 
 function App() {
   return (
@@ -7,37 +8,25 @@ function App() {
       <header>
         <Navbar bg="primary" variant="dark" expand="lg">
           <Container>
-            <Navbar.Brand>Trend zone</Navbar.Brand>
+            <Navbar.Brand>{STRINGS.title}</Navbar.Brand>
           </Container>
           <Nav>
             <a href="/" className="nav-link">
-              Cart
+              {STRINGS.navbar.cart}
             </a>
             <a href="/" className="nav-link">
-              Sign in
+              {STRINGS.navbar.signIn}
             </a>
           </Nav>
         </Navbar>
       </header>
       <main>
         <Container className="mt-3">
-          <Row>
-            {sampleProducts.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="product-image"
-                />
-                <h2>{product.name}</h2>
-                <p>${product.price}</p>
-              </Col>
-            ))}
-          </Row>
+          <Outlet />
         </Container>
       </main>
       <footer>
-        <div className="text-center">All rights reserved</div>
+        <div className="text-center">{STRINGS.footer}</div>
       </footer>
     </div>
   );
