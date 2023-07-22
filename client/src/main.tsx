@@ -11,6 +11,7 @@ import App from './App.tsx';
 import './index.css';
 import HomePage from './pages/HomePage.tsx';
 import ProductPage from './pages/ProductPage.tsx';
+import NotFoundPage from './pages/PageNotFound.tsx';
 import axios from 'axios';
 
 // in production, the url for backend is same as of frontend
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomePage />} />
       <Route path="product/:slug" element={<ProductPage />} />
+      <Route path="*" element={<NotFoundPage />} />
       {/* <Route path="dashboard" element={<Dashboard />} /> */}
     </Route>
   )
