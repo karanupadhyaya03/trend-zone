@@ -11,3 +11,11 @@
   max-width: 400px;
   width: 100%;
 }
+
+.star-rating {
+  color: #00ff95;
+}
+
+.review-count {
+  color: #0e0e0e;
+}
