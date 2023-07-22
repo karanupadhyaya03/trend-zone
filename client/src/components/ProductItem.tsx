@@ -1,4 +1,4 @@
-import { Button, Card, Col } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Product } from '../types/Product';
 import Rating from './Rating';

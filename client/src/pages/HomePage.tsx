@@ -7,6 +7,8 @@ import axios from 'axios';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import ProductItem from '../components/ProductItem';
+import { Helmet } from 'react-helmet-async';
+import { USER_DISPLAY_STRINGS as STRINGS } from '../resources/user_display_strings';
 
 type State = {
   products: Product[];
@@ -68,6 +70,9 @@ const HomePage = () => {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <Row>
+      <Helmet>
+        <title>{STRINGS.title}</title>
+      </Helmet>
       {products.map((product) => (
         <Col key={product.slug} sm={6} md={4} lg={3}>
           <ProductItem product={product} />

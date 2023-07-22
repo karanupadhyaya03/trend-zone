@@ -7,6 +7,9 @@ export const USER_DISPLAY_STRINGS = {
   homePage: {
     loading: 'Loading...',
   },
+  productPage: {
+    title: 'Product page',
+  },
   pageNotFound: {
     title: '404 - Page Not Found',
     description: 'Oops! The page you are looking for does not exist.',
