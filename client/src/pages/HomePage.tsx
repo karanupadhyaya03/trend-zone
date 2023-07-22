@@ -1,4 +1,4 @@
-import { Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Product } from '../types/Product';
 import { useEffect, useReducer } from 'react';
 import getError from '../utils/getError';
@@ -69,7 +69,9 @@ const HomePage = () => {
   ) : (
     <Row>
       {products.map((product) => (
-        <ProductItem product={product} />
+        <Col key={product.slug} sm={6} md={4} lg={3}>
+          <ProductItem product={product} />
+        </Col>
       ))}
     </Row>
   );

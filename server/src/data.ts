@@ -2,8 +2,8 @@ import { Product } from './types/Product';
 
 export const sampleProducts: Product[] = [
   {
-    name: 'Coding Club Summer Merch',
-    slug: 'coding-club-summer-merch',
+    name: 'Coding Club Merch',
+    slug: 'coding-club-merch',
     category: 'Shirts',
     image: '../images/merch1.jpg',
     price: 120,
