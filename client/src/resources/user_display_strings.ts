@@ -4,5 +4,8 @@ export const USER_DISPLAY_STRINGS = {
     cart: 'Cart',
     signIn: 'Sign in',
   },
+  homePage: {
+    loading: 'Loading...',
+  },
   footer: 'All rights reserved',
 };
