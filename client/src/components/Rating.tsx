@@ -10,20 +10,20 @@ const Rating = (props: {
     for (let i = 1; i <= 5; i++) {
       if (i <= numStars) {
         stars.push(
-          <span>
-            <i key={i} className="fas fa-star star-rating" />
+          <span key={i}>
+            <i className="fas fa-star star-rating" />
           </span>
         );
       } else if (i - 0.5 <= numStars) {
         stars.push(
-          <span>
-            <i key={i} className="fas fa-star-half-alt star-rating" />
+          <span key={i}>
+            <i className="fas fa-star-half-alt star-rating" />
           </span>
         );
       } else {
         stars.push(
-          <span>
-            <i key={i} className="far fa-star star-rating" />
+          <span key={i}>
+            <i className="far fa-star star-rating" />
           </span>
         );
       }
