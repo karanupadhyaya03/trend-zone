@@ -9,6 +9,14 @@ export const USER_DISPLAY_STRINGS = {
   },
   productPage: {
     title: 'Product page',
+    description: 'Description:',
+    addToCart: 'Add to cart',
+    price: 'Price:',
+    status: {
+      title: 'Status:',
+      inStock: 'In stock',
+      unavailable: 'Unavailable',
+    },
   },
   pageNotFound: {
     title: '404 - Page Not Found',

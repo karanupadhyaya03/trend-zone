@@ -19,3 +19,7 @@
 .review-count {
   color: #0e0e0e;
 }
+
+img.large {
+  max-width: 100%;
+}
