@@ -28,5 +28,13 @@ export const USER_DISPLAY_STRINGS = {
     description: 'Oops! The page you are looking for does not exist.',
     backToHome: 'Back to Home',
   },
+  cartPage: {
+    title: 'Shopping cart',
+    messages: {
+      emptyCart: 'The cart is empty.',
+    },
+    goShopping: 'Go shopping',
+    proceedToCheckout: 'Proceed to checkout',
+  },
   footer: 'All rights reserved',
 };

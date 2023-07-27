@@ -16,6 +16,7 @@ import NotFoundPage from './pages/PageNotFound.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { StoreProvider } from './Store.tsx';
+import CartPage from './pages/CartPage.tsx';
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomePage />} />
       <Route path="product/:slug" element={<ProductPage />} />
+      <Route path="cart" element={<CartPage />} />
       <Route path="*" element={<NotFoundPage />} />
       {/* <Route path="dashboard" element={<Dashboard />} /> */}
     </Route>
