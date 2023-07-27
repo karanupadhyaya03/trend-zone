@@ -2,6 +2,7 @@ import { Badge, Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
 import { USER_DISPLAY_STRINGS as STRINGS } from './resources/user_display_strings';
 import { useContext, useEffect } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Store } from './Store';
@@ -32,7 +33,9 @@ function App() {
           variant={mode}
         >
           <Container>
-            <Navbar.Brand>{STRINGS.title}</Navbar.Brand>
+            <LinkContainer to="/">
+              <Navbar.Brand>{STRINGS.title}</Navbar.Brand>
+            </LinkContainer>
           </Container>
           <Nav>
             <Button variant={mode} onClick={switchModeHandler}>
