@@ -1,4 +1,11 @@
-import { Badge, Button, Container, Nav, Navbar } from 'react-bootstrap';
+import {
+  Badge,
+  Button,
+  Container,
+  Nav,
+  NavDropdown,
+  Navbar,
+} from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
 import { USER_DISPLAY_STRINGS as STRINGS } from './resources/user_display_strings';
 import { useContext, useEffect } from 'react';
@@ -9,7 +16,7 @@ import { Store } from './Store';
 
 function App() {
   const {
-    state: { mode, cart },
+    state: { mode, cart, userInfo },
     dispatch,
   } = useContext(Store);
 
@@ -19,6 +26,16 @@ function App() {
 
   const switchModeHandler = () => {
     dispatch({ type: 'SWITCH_MODE' });
+  };
+
+  const signoutHandler = () => {
+    dispatch({ type: 'USER_SIGN_OUT' });
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
+
+    window.location.href = '/signin';
   };
 
   return (
@@ -44,14 +61,29 @@ function App() {
             <Link to="/cart" className="nav-link">
               {STRINGS.navbar.cart}
               {cart.cartItems.length > 0 && (
-                <Badge pill bg="danger">
-                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                </Badge>
+                <>
+                  &nbsp;
+                  <Badge pill bg="danger">
+                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                  </Badge>
+                </>
               )}
             </Link>
-            <a href="/" className="nav-link">
-              {STRINGS.navbar.signIn}
-            </a>
+            {userInfo ? (
+              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                <Link
+                  className="dropdown-item"
+                  to="#signout"
+                  onClick={signoutHandler}
+                >
+                  {STRINGS.navbar.signOut}
+                </Link>
+              </NavDropdown>
+            ) : (
+              <Link className="nav-link" to="/signin">
+                {STRINGS.navbar.signIn}
+              </Link>
+            )}
           </Nav>
         </Navbar>
       </header>

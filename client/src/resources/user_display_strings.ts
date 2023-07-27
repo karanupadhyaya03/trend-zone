@@ -3,6 +3,7 @@ export const USER_DISPLAY_STRINGS = {
   navbar: {
     cart: 'Cart',
     signIn: 'Sign in',
+    signOut: 'Sign out',
   },
   homePage: {
     loading: 'Loading...',
@@ -35,6 +36,15 @@ export const USER_DISPLAY_STRINGS = {
     },
     goShopping: 'Go shopping',
     proceedToCheckout: 'Proceed to checkout',
+  },
+  signInPage: {
+    title: 'Sign in',
+    labels: {
+      email: 'Email',
+      password: 'Password',
+      newCustomer: 'New customer?',
+      createAccount: 'Create your account',
+    },
   },
   footer: 'All rights reserved',
 };

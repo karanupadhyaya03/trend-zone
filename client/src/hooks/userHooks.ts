@@ -11,6 +11,10 @@ export const useSignInMutation = () =>
       email: string;
       password: string;
     }) =>
-      (await apiClient.post<UserInfo>(`api/users/signin`, { email, password }))
-        .data,
+      (
+        await apiClient.post<UserInfo>(`api/users/signin`, {
+          email,
+          password,
+        })
+      ).data,
   });
