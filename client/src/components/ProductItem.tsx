@@ -7,6 +7,7 @@ import { Store } from '../Store';
 import { CartItem } from '../types/Cart';
 import convertProductToCartItem from '../utils/convertProductToCartItem';
 import { USER_DISPLAY_STRINGS as STRINGS } from '../resources/user_display_strings';
+import { toast } from 'react-toastify';
 
 const ProductItem = ({ product }: { product: Product }) => {
   const { state, dispatch } = useContext(Store);
@@ -19,7 +20,7 @@ const ProductItem = ({ product }: { product: Product }) => {
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
     if (product.countInStock < quantity) {
-      alert(STRINGS.productPage.alert);
+      toast.warn(STRINGS.productPage.messages.outOfStock);
       return;
     }
 
@@ -27,6 +28,8 @@ const ProductItem = ({ product }: { product: Product }) => {
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
     });
+
+    toast.success(STRINGS.productPage.messages.addedToCart);
   };
 
   return (

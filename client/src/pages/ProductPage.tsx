@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { USER_DISPLAY_STRINGS as STRINGS } from '../resources/user_display_strings';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetProductDetailsBySlugQuery } from '../hooks/productHooks';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -8,6 +9,9 @@ import { ApiError } from '../types/ApiError';
 import getError from '../utils/getError';
 import { Badge, Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
 import Rating from '../components/Rating';
+import { Store } from '../Store';
+import { toast } from 'react-toastify';
+import convertProductToCartItem from '../utils/convertProductToCartItem';
 
 const ProductPage = () => {
   const params = useParams();
@@ -18,6 +22,29 @@ const ProductPage = () => {
     isLoading,
     error,
   } = useGetProductDetailsBySlugQuery(slug!);
+
+  const { state, dispatch } = useContext(Store);
+  const {
+    cart: { cartItems },
+  } = state;
+
+  const navigate = useNavigate();
+
+  const addToCartHandler = () => {
+    const existItem = cartItems.find((x) => x._id === product!._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+
+    if (product!.countInStock < quantity) {
+      toast.warn(STRINGS.productPage.messages.outOfStock);
+      return;
+    }
+    dispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...convertProductToCartItem(product!), quantity },
+    });
+    toast.success(STRINGS.productPage.messages.addedToCart);
+    navigate('/cart');
+  };
 
   return isLoading ? (
     <LoadingBox />
@@ -84,7 +111,7 @@ const ProductPage = () => {
                 {product!.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className="d-grid">
-                      <Button variant="primary">
+                      <Button variant="primary" onClick={addToCartHandler}>
                         {STRINGS.productPage.addToCart}
                       </Button>
                     </div>

@@ -2,6 +2,8 @@ import { Badge, Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
 import { USER_DISPLAY_STRINGS as STRINGS } from './resources/user_display_strings';
 import { useContext, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Store } from './Store';
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column vh-100">
+      <ToastContainer position="bottom-center" limit={1} />
       <header>
         <Navbar
           expand="lg"

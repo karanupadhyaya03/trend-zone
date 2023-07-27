@@ -18,7 +18,10 @@ export const USER_DISPLAY_STRINGS = {
       unavailable: 'Unavailable',
       outOfStock: 'Out of stock',
     },
-    alert: 'Sorry. The product is out of stock.',
+    messages: {
+      addedToCart: 'Product added to the cart.',
+      outOfStock: 'Sorry. The product is out of stock.',
+    },
   },
   pageNotFound: {
     title: '404 - Page Not Found',
