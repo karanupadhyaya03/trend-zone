@@ -16,7 +16,9 @@ export const USER_DISPLAY_STRINGS = {
       title: 'Status:',
       inStock: 'In stock',
       unavailable: 'Unavailable',
+      outOfStock: 'Out of stock',
     },
+    alert: 'Sorry. The product is out of stock.',
   },
   pageNotFound: {
     title: '404 - Page Not Found',
