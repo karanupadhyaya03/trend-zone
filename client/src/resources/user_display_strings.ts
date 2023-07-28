@@ -46,5 +46,14 @@ export const USER_DISPLAY_STRINGS = {
       createAccount: 'Create your account',
     },
   },
+  signUpPage: {
+    title: 'Sign up',
+    passwordMismatch: 'Passwords do not match',
+    labels: {
+      name: 'Name',
+      alreadyHaveAccout: 'Already have an account?',
+      confirmPassword: 'Confirm password',
+    },
+  },
   footer: 'All rights reserved',
 };
