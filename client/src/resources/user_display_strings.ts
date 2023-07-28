@@ -66,6 +66,10 @@ export const USER_DISPLAY_STRINGS = {
       country: 'Country',
     },
   },
+  paymentMethodPage: {
+    title: 'Payment method',
+    submitButton: 'Continue',
+  },
   checkoutSteps: {
     signIn: 'Sign in',
     shipping: 'Shipping',
