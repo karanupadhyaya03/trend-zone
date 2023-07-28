@@ -84,6 +84,16 @@ export const USER_DISPLAY_STRINGS = {
     totalPrice: 'Total price',
     placeOrder: 'Place order',
   },
+  orderPage: {
+    title: 'Order details',
+    notFound: 'Order not found',
+    messages: {
+      deliveredAt: 'Delivered at:',
+      notDelivered: 'Not delivered',
+      paidAt: 'Paid at:',
+      notPaid: 'Not paid',
+    },
+  },
   checkoutSteps: {
     signIn: 'Sign in',
     shipping: 'Shipping',
