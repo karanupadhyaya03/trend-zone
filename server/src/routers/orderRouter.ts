@@ -6,6 +6,20 @@ import { Product } from '../models/productModel';
 
 export const orderRouter = express.Router();
 
+orderRouter.get(
+  // /api/orders/:id
+  '/:id',
+  isAuth,
+  expressAsyncHandler(async (req: Request, res: Response) => {
+    const order = await OrderModel.findById(req.params.id);
+
+    if (order) {
+      res.json(order);
+    }
+    res.status(400).json({ message: 'Order not found' });
+  })
+);
+
 orderRouter.post(
   '/',
   isAuth,
