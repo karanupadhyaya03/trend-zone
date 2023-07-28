@@ -55,5 +55,22 @@ export const USER_DISPLAY_STRINGS = {
       confirmPassword: 'Confirm password',
     },
   },
+  shippingAddressPage: {
+    title: 'Shipping address',
+    submitButton: 'Continue',
+    labels: {
+      fullName: 'Full name',
+      address: 'Address',
+      city: 'City',
+      postalCode: 'Postal code',
+      country: 'Country',
+    },
+  },
+  checkoutSteps: {
+    signIn: 'Sign in',
+    shipping: 'Shipping',
+    payment: 'Payment',
+    placeOrder: 'Place order',
+  },
   footer: 'All rights reserved',
 };
