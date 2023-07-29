@@ -15,8 +15,9 @@ orderRouter.get(
 
     if (order) {
       res.json(order);
+    } else {
+      res.status(400).json({ message: 'Order not found' });
     }
-    res.status(400).json({ message: 'Order not found' });
   })
 );
 
