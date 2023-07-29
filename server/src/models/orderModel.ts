@@ -52,10 +52,10 @@ class PaymentResult {
   public status!: string;
 
   @prop()
-  public updateTime!: string;
+  public update_time!: string;
 
   @prop()
-  public emailAddress?: string;
+  public email_address?: string;
 }
 
 @modelOptions({ schemaOptions: { timestamps: true } })
