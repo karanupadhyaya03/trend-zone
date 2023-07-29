@@ -4,6 +4,7 @@ export const USER_DISPLAY_STRINGS = {
     cart: 'Cart',
     signIn: 'Sign in',
     signOut: 'Sign out',
+    orders: 'Orders',
   },
   homePage: {
     loading: 'Loading...',
