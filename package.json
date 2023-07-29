@@ -1,0 +1,21 @@
+{
+  "name": "trend-zone",
+  "version": "1.0.0",
+  "description": "a site for college students to buy college goodies",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd server && npm install && npm run build && cd ../client && npm install && npm run build",
+    "start": "set TG_ALLOW_MIXED=ALLOW && node server/build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karanupadhyaya03/trend-zone.git"
+  },
+  "author": "Karan Upadhyaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karanupadhyaya03/trend-zone/issues"
+  },
+  "homepage": "https://github.com/karanupadhyaya03/trend-zone#readme"
+}
