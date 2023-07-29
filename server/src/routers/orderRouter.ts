@@ -63,7 +63,7 @@ orderRouter.put(
       };
 
       const updatedOrder = await order.save();
-      res.send(updatedOrder);
+      res.send({ order: updatedOrder, message: 'Order Paid Successfully' });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
     }
