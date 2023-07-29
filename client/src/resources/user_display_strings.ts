@@ -93,6 +93,10 @@ export const USER_DISPLAY_STRINGS = {
       paidAt: 'Paid at:',
       notPaid: 'Not paid',
     },
+    payment: {
+      payPalError: 'Error while connecting to PayPal',
+      testPay: 'Test pay',
+    },
   },
   checkoutSteps: {
     signIn: 'Sign in',

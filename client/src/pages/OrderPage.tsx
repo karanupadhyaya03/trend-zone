@@ -1,18 +1,100 @@
 import { Link, useParams } from 'react-router-dom';
-import { useGetOrderDetailsQuery } from '../hooks/orderHooks';
+import {
+  useGetOrderDetailsQuery,
+  useGetPayPalClientIdQuery,
+  usePayOrderMutation,
+} from '../hooks/orderHooks';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import getError from '../utils/getError';
 import { ApiError } from '../types/ApiError';
 import { USER_DISPLAY_STRINGS as STRINGS } from '../resources/user_display_strings';
 import { Helmet } from 'react-helmet-async';
-import { Card, Col, ListGroup, Row } from 'react-bootstrap';
+import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import {
+  PayPalButtons,
+  PayPalButtonsComponentProps,
+  SCRIPT_LOADING_STATE,
+  usePayPalScriptReducer,
+} from '@paypal/react-paypal-js';
+import { useEffect } from 'react';
 
 const OrderPage = () => {
   const params = useParams();
   const { id: orderId } = params;
 
-  const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId!);
+  const {
+    data: order,
+    isLoading,
+    error,
+    refetch,
+  } = useGetOrderDetailsQuery(orderId!);
+
+  const { mutateAsync: payOrder, isLoading: loadingPay } =
+    usePayOrderMutation();
+  const testPayHandler = async () => {
+    await payOrder({ orderId: orderId! });
+    refetch();
+    toast.success('Payment Successful');
+  };
+
+  const [{ isPending, isRejected }, paypalDispatch] = usePayPalScriptReducer();
+  const { data: paypalConfig } = useGetPayPalClientIdQuery(); // paypalConfig is the result of keyRouter in backend
+
+  useEffect(() => {
+    if (paypalConfig && paypalConfig.clientId) {
+      const loadPaypalScript = async () => {
+        paypalDispatch({
+          type: 'resetOptions',
+          value: {
+            clientId: paypalConfig.clientId,
+            currency: 'USD',
+          },
+        });
+
+        paypalDispatch({
+          type: 'setLoadingStatus',
+          value: SCRIPT_LOADING_STATE.PENDING,
+        });
+      };
+
+      loadPaypalScript();
+    }
+  }, [paypalConfig, paypalDispatch]);
+
+  const paypalButtonTransactionProps: PayPalButtonsComponentProps = {
+    style: { layout: 'vertical' },
+    createOrder(data, actions) {
+      return actions.order
+        .create({
+          purchase_units: [
+            {
+              amount: {
+                value: order!.totalPrice.toString(),
+              },
+            },
+          ],
+        })
+        .then((orderId: string) => {
+          return orderId;
+        });
+    },
+    onApprove(data, actions) {
+      return actions.order!.capture().then(async (details) => {
+        try {
+          await payOrder({ orderId: orderId!, ...details });
+          refetch();
+          toast.success('Payment Successful');
+        } catch (err) {
+          toast.error(getError(err as ApiError));
+        }
+      });
+    },
+    onError: (err) => {
+      toast.error(getError(err as ApiError));
+    },
+  };
 
   return isLoading ? (
     <LoadingBox />
@@ -132,6 +214,27 @@ const OrderPage = () => {
                     <Col>${order.totalPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
+                {!order.isPaid && (
+                  <ListGroup.Item>
+                    {isPending ? (
+                      <LoadingBox />
+                    ) : isRejected ? (
+                      <MessageBox variant="danger">
+                        {STRINGS.orderPage.payment.payPalError}
+                      </MessageBox>
+                    ) : (
+                      <div>
+                        <PayPalButtons
+                          {...paypalButtonTransactionProps}
+                        ></PayPalButtons>
+                        <Button onClick={testPayHandler}>
+                          {STRINGS.orderPage.payment.testPay}
+                        </Button>
+                      </div>
+                    )}
+                    {loadingPay && <LoadingBox />}
+                  </ListGroup.Item>
+                )}
               </ListGroup>
             </Card.Body>
           </Card>
